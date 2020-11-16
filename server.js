@@ -21,11 +21,13 @@ const CONFIG = require(path.join(__dirname, 'config.js'));
 const LOGGER = require(path.join(__dirname, 'logger.js'));
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({limit:CONFIG.getPostJsonSizeLimit()}));
 app.use('/js', express.static(path.join(__dirname, 'views/js')));
 app.use('/css', express.static(path.join(__dirname, 'views/css')));
 app.use('/json_viewer', express.static(__dirname + '/node_modules/jquery.json-viewer/json-viewer/'));
+app.use('/mentions', express.static(__dirname + '/node_modules/jquery-mentions-input/'));
+app.use('/underscore', express.static(__dirname + '/node_modules/underscore/'));
 app.use('/assets', express.static(path.join(__dirname, 'views/assets')));
 app.set('view engine', 'ejs');
 
@@ -53,14 +55,15 @@ app.get('/about', (req, res) => {
 });
 
 //API for WEB View
-app.post('/api/web/fetch', (req, res) => {
+app.post('/api/get/thanks', (req, res) => {
   LOGGER.log('WEB Server Data Requested: Sending the JSON object', i);
   res.json(API.getJson()); //send them the data they need
 });
 
 //update the database with new info
-app.post('/api/thankful/update', (req, res) => {
-  LOGGER.log('DCS Server Stats Received: "' + req.body.name + '", ID ' + req.body.id, i);
+app.post('/api/give/thanks', (req, res) => {
+  //LOGGER.log('DCS Server Stats Received: "' + req.body.name + '", ID ' + req.body.id, i);
+  console.log(req.body)
   var err = API.update(req.body); //send it the stats and server info
   if (err) {
     LOGGER.log(err, e);

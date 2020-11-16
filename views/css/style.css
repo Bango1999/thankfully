@@ -20,8 +20,8 @@ main {font-family: 'Slabo 27px', serif;}
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
 }
-.blackops {
-  font-family: 'Black Ops One', cursive;
+.themefont {
+  font-family: 'Knewave', cursive;
   font-size: 2em;
   float: none;
 }
@@ -87,4 +87,14 @@ main {font-family: 'Slabo 27px', serif;}
 @keyframes Move{
   0%{transform:rotate(90deg);}
   100%{transform:rotate(-90deg);}
+}
+
+
+.thanks-list-message {
+  font-size: 1.25em;
+  padding: 20px;
+}
+
+.thanks-list-message:nth-child(even) {
+  background: rgba(230,230,230,0.4);
 }
