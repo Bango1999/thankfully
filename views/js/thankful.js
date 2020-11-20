@@ -5,9 +5,20 @@ $(document).ready(function() {
     onDataRequest:function (mode, query, callback) {
       var data = _.filter(people, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
       callback.call(this, data);
-    }
+    },
+
   });
 })
+
+//------------------------
+
+function nl2br (str, is_xhtml) {
+    if (typeof str === 'undefined' || str === null) {
+        return '';
+    }
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
 
 //------------------------
 
@@ -79,11 +90,12 @@ function populatePeople(ppl) {
 function populateThanks(msgs, filter=false) {
   $('#thanks-display').empty();
   msgs.forEach((item, i) => {
-    if (!filter || item.tags.includes(parseInt(filter))) {
+    if (!filter ||
+        item.hasOwnProperty('tags') && item.tags.includes(filter)) {
       $('#thanks-display').append(
         $('<div>', {
           class: 'thanks-list-message col-md-12',
-          text: item.message,
+          html: nl2br(item.message),
         })
       )
     }

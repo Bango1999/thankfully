@@ -56,14 +56,13 @@ app.get('/about', (req, res) => {
 
 //API for WEB View
 app.post('/api/get/thanks', (req, res) => {
-  LOGGER.log('WEB Server Data Requested: Sending the JSON object', i);
+  LOGGER.log('Sending Thanks', i);
   res.json(API.getJson()); //send them the data they need
 });
 
 //update the database with new info
 app.post('/api/give/thanks', (req, res) => {
-  //LOGGER.log('DCS Server Stats Received: "' + req.body.name + '", ID ' + req.body.id, i);
-  console.log(req.body)
+  LOGGER.log('Thanks recieved: "' + req.body.name + '", ID ' + req.body.id, i);
   var err = API.update(req.body); //send it the stats and server info
   if (err) {
     LOGGER.log(err, e);

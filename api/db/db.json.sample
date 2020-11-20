@@ -1,0 +1,31 @@
+{
+    "messages": [
+        {
+            "message": "I'm thankful for Alice",
+            "tags": [
+                "1"
+            ]
+        },
+        {
+            "message": "I'm thankful for Alice and Bob",
+            "tags": [
+                "1",
+                "2"
+            ]
+        }
+    ],
+    "people": [
+        {
+            "id": 1,
+            "name": "Alice",
+            "avatar": "http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif",
+            "type": "contact"
+        },
+        {
+            "id": 2,
+            "name": "Bob",
+            "avatar": "http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif",
+            "type": "contact"
+        }
+    ]
+}
