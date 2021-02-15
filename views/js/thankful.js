@@ -43,7 +43,7 @@ $('#send-thanks-btn').on('click', function() {
   $.ajax({
     url: "/api/give/thanks",
     type: "POST",
-    dataType: "json",
+    dataType: "text",
     data: jsonifyGiveThanksForm(),
     //on successful data reception, we can now show the data and make it all functional
     success: function(data) {
@@ -51,6 +51,9 @@ $('#send-thanks-btn').on('click', function() {
         console.error('ERROR: Server could not return a valid database object.');
         return;
       }
+      messages.push(jsonifyGiveThanksForm());
+      populateThanks(messages, $('#person-selector').val());
+      $("#thanks-message").empty();
 
     }, //end success
     error: function(err) { console.log(err) }
@@ -89,7 +92,7 @@ function populatePeople(ppl) {
 
 function populateThanks(msgs, filter=false) {
   $('#thanks-display').empty();
-  msgs.forEach((item, i) => {
+  msgs.slice().reverse().forEach((item, i) => {
     if (!filter ||
         item.hasOwnProperty('tags') && item.tags.includes(filter)) {
       $('#thanks-display').append(
@@ -130,12 +133,9 @@ function showTree() {
       messages = data.messages;
 
       //DO STUFF
-      console.log(data);
 
       populatePeople(data.people);
       populateThanks(data.messages);
-
-
 
       //register lodaing icon events and when to start/stop
       $('#loading-icon').bind('showTree', function() {
